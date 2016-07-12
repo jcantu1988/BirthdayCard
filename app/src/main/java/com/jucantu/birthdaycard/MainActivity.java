@@ -26,26 +26,35 @@ public class MainActivity extends AppCompatActivity {
 
                 names = new BirthdayCardNames();
 
+                //set the names
                 names.setFromName(((EditText)findViewById(R.id.fromEditText)).getText().toString());
                 names.setToName(((EditText)findViewById(R.id.toEditTextView)).getText().toString());
 
+                //get the error message textviews
                 TextView fromError = ((TextView) findViewById(R.id.fromErrorTextView));
-                fromError.setVisibility(View.INVISIBLE);
-
                 TextView toError = ((TextView) findViewById(R.id.toErrorTextView));
+
+                //set/reset to invisible
+                fromError.setVisibility(View.INVISIBLE);
                 toError.setVisibility(View.INVISIBLE);
 
+                //set visible the "From" error message if user didn't type name
                 if(names.getFromName().trim().equals("")){
                     fromError.setVisibility(View.VISIBLE);
                 }
 
+                //set visible the "To" error message if user didn't type name
                 if(names.getToName().trim().equals("")){
                     toError.setVisibility(View.VISIBLE);
                 }
 
+                //go to BirthdayCardActivity if user typed both names
                 if(toError.getVisibility() != View.VISIBLE && fromError.getVisibility() != View.VISIBLE) {
                     Intent i = new Intent(getApplicationContext(), BirthdayCardActivity.class);
+
+                    //set the info that is going to be used in the other activity
                     i.putExtra("birthdayCardNames", names);
+
                     startActivity(i);
                 }
             }
