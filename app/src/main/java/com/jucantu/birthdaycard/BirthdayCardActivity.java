@@ -3,12 +3,10 @@ package com.jucantu.birthdaycard;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,8 +43,6 @@ public class BirthdayCardActivity extends AppCompatActivity {
             cardImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d("MEASUREMENTS", "Width: "+cardImage.getDrawable().getIntrinsicWidth() +" HEIGHT: "+cardImage.getDrawable().getIntrinsicHeight());
-                    Log.d("MEASUREMENTS", "Width: "+asciiImageTextView.getWidth() +" HEIGHT: "+asciiImageTextView.getHeight());
                     if(asciiImageTextView.getText() == "" ) {
 
                         //get the card image that is displayed
@@ -55,16 +51,10 @@ public class BirthdayCardActivity extends AppCompatActivity {
                         //get the width of a text character in the aciiImageTextView
                         float textWidth = asciiImageTextView.getPaint().measureText("_");
 
-                        Rect bounds = new Rect();
-                        asciiImageTextView.getPaint().getTextBounds("_#8&o:*. ", 0, 9, bounds);
-                        float textHeight = asciiImageTextView.getPaint().getTextSize();//bounds.height();
-                        float boundsHeight = bounds.bottom+ bounds.height();
-                        Log.d("TEXT_SIZE", "Width: "+textWidth +" HEIGHT: "+textHeight +" BOUNDS: "+boundsHeight);
-
                         //set a scaled width and height so that all the characters
                         //of the ascii image text fit in the screen. (Each pixle in image will represent a character)
                         int scaled_width = (int) (asciiImageTextView.getWidth() / textWidth);
-                        int scaled_height = (int) (scaled_width*((float)asciiImageTextView.getHeight() /(float)asciiImageTextView.getWidth()))/2;//(asciiImageTextView.getHeight() / boundsHeight)/2;//
+                        int scaled_height = (int) (scaled_width*((float)asciiImageTextView.getHeight() /(float)asciiImageTextView.getWidth()))/2;
 
                         //create a bitmap from the drawable image and
                         //convert it to ascii text
